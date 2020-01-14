@@ -1,0 +1,9 @@
+{application,elixr,
+             [{applications,[kernel,stdlib,elixir,logger]},
+              {description,"elixr"},
+              {modules,['Elixir.Elixr','Elixir.Elixr.Event',
+                        'Elixir.Elixr.EventProcessor',
+                        'Elixir.Elixr.FileReader',
+                        'Elixir.Elixr.LeadQualifier']},
+              {registered,[]},
+              {vsn,"0.1.0"}]}.
