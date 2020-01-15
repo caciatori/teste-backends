@@ -91,7 +91,8 @@ defmodule Elixr.EventProcessor do
       build_event_struct(event_data)
       | proposal_id: proposal_id,
         proposal_loan_value: String.to_float(proposal_loan_value),
-        proposal_number_of_monthly_installments: String.to_integer(proposal_number_of_monthly_installments)
+        proposal_number_of_monthly_installments:
+          String.to_integer(proposal_number_of_monthly_installments)
     }
   end
 

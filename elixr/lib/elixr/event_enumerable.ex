@@ -1,14 +1,13 @@
 defmodule Elixr.EventEnumerable do
-
-  def find_by_schema_and_proposal_id(events, schema, proposal_id) do
-    find_by_schema(events, schema)
+  def filter_by_schema_and_proposal_id(events, schema, proposal_id) do
+    filter_by_schema(events, schema)
     |> Enum.filter(&(&1.proposal_id == proposal_id))
   end
 
-  def find_by_schema(nil, _), do: []
-  def find_by_schema([], _), do: []
+  def filter_by_schema(nil, _), do: []
+  def filter_by_schema([], _), do: []
 
-  def find_by_schema(list, schema) do
+  def filter_by_schema(list, schema) do
     Enum.filter(list, &(&1.event_schema == schema))
     |> Enum.sort(&by_datetime_desc/2)
   end

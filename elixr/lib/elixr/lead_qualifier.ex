@@ -6,6 +6,6 @@ defmodule Elixr.LeadQualifier do
   end
 
   defdelegate proponents_are_valid?(events, event), to: Proponent
-  defdelegate proposal_its_valid?(event)          , to: Proposal
+  defdelegate proposal_its_valid?(event), to: Proposal
   defdelegate warranties_its_valid?(events, event), to: Warranty
 end
