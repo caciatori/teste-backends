@@ -1,0 +1,9 @@
+{application,bcredi_app,
+             [{applications,[kernel,stdlib,elixir,logger]},
+              {description,"bcredi_app"},
+              {modules,['Elixir.BcrediApp','Elixir.BcrediApp.Application',
+                        'Elixir.BcrediApp.Queue','Elixir.BcrediApp.Server',
+                        'Elixir.Elixr.Event']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.BcrediApp.Application',[]}}]}.
