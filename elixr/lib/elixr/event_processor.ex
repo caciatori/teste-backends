@@ -5,14 +5,10 @@ defmodule Elixr.EventProcessor do
     events: [],
     total_of_events: 0
   )
-
-  def process(""), do: nil
-  def process(nil), do: nil
+  def process(nil), do: []
 
   def process(message) do
-    message
-    |> String.split("\n")
-    |> transform()
+    transform(message)
   end
 
   defp transform(str_list) do

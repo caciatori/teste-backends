@@ -12,6 +12,15 @@ defmodule Elixr.Proposal do
     |> Enum.find(nil, &(&1.proposal_id == proposal_id))
   end
 
+  def monthly_loan_value(events, proposal_id) do
+    %{
+      proposal_number_of_monthly_installments: proposal_number_of_monthly_installments,
+      proposal_loan_value: proposal_loan_value
+    } = find_proposal_by_id(events, proposal_id)
+
+    Float.round(proposal_loan_value / proposal_number_of_monthly_installments, 2)
+  end
+
   defp proposal_loan_value_valid?(%{proposal_loan_value: proposal_loan_value}) do
     proposal_loan_value >= 30_000 && proposal_loan_value <= 3_000_000
   end

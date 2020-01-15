@@ -5,9 +5,8 @@ defmodule EventProcessorTest do
 
   @model_one FileReader.read_model_one()
 
-  test "Read an invalid parameter and return a nil value" do
-    assert EventProcessor.process("") == nil
-    assert EventProcessor.process(nil) == nil
+  test "Read an invalid parameter and return a empty list" do
+    assert EventProcessor.process(nil) == []
   end
 
   test "total_of_events is equals ao length of events" do

@@ -23,5 +23,6 @@ defmodule Elixr.FileReader do
     file_name
     |> Path.expand(__DIR__)
     |> File.read!()
+    |> String.split("\n")
   end
 end

@@ -1,18 +1,7 @@
 defmodule Elixr do
-  @moduledoc """
-  Documentation for Elixr.
-  """
+  alias Elixr.{EventProcessor, FileReader}
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Elixr.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def process_message() do
+    EventProcessor.process(FileReader.read_model_one())
   end
 end
