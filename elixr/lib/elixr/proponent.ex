@@ -3,8 +3,7 @@ defmodule Elixr.Proponent do
 
   def proponents_are_valid?(events, %{:proposal_id => proposal_id}) do
     proponents =
-      EventEnumerable.find_by_schema(events, :proponent)
-      |> Enum.filter(&(&1.proposal_id == proposal_id))
+      EventEnumerable.find_by_schema_and_proposal_id(events, :proponent, proposal_id)
 
     length(proponents) == 2 &&
       Enum.all?(proponents, &they_are_adults?/1) &&

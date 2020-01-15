@@ -14,7 +14,7 @@ defmodule Elixr.LeadQualifierTest do
   #   assert t == "814695b6-f44e-491b-9921-af806f5bb25c"
   # end
 
-  test "proposal_loan_value is invalid" do
+  test "proposal_its_valid/1 shoud return false with an invalid param" do
     p1 = %{proposal_loan_value: 10000, proposal_number_of_monthly_installments: 8}
     p2 = %{proposal_loan_value: 10_000_000, proposal_number_of_monthly_installments: 360}
     p3 = %{proposal_loan_value: -10, proposal_number_of_monthly_installments: 0}
@@ -26,7 +26,7 @@ defmodule Elixr.LeadQualifierTest do
     assert LeadQualifier.proposal_its_valid?(p4) == false
   end
 
-  test "proposal_loan_value is valid" do
+  test "proposal_its_valid/1 shoud return true with a valid param" do
     p1 = %{proposal_loan_value: 30000, proposal_number_of_monthly_installments: 24}
     p2 = %{proposal_loan_value: 200_000, proposal_number_of_monthly_installments: 48}
     p3 = %{proposal_loan_value: 3_000_000, proposal_number_of_monthly_installments: 180}
@@ -36,7 +36,7 @@ defmodule Elixr.LeadQualifierTest do
     assert LeadQualifier.proposal_its_valid?(p3) == true
   end
 
-  test "proposal_has_more_than_one_proponent/2 should return true with a valid model " do
+  test "proponents_are_valid/2 should return true with a valid model " do
     %{events: events_one} = @input_one
     %{events: events_two} = @input_two
 
@@ -51,7 +51,7 @@ defmodule Elixr.LeadQualifierTest do
              })
   end
 
-  test "proposal_has_more_than_one_proponent/2 should return false with a invalid model " do
+  test "proponents_are_valid/2 should return false with an invalid model " do
     %{events: invalid_events} = EventProcessor.process(FileReader.read("invalid_proponent.txt"))
 
     assert false ==
@@ -66,6 +66,21 @@ defmodule Elixr.LeadQualifierTest do
 
     assert false ==
              LeadQualifier.proponents_are_valid?(nil, %{
+               proposal_id: "af6e600b-2622-40d1-89ad-d3e5b6cc2fdf"
+             })
+  end
+
+  test "warranties_its_valid/2 should return true with a valid model " do
+    %{events: events_one} = @input_one
+    %{events: events_two} = @input_two
+
+    assert true ==
+             LeadQualifier.warranties_its_valid?(events_one, %{
+               proposal_id: "bd6abe95-7c44-41a4-92d0-edf4978c9f4e"
+             })
+
+    assert true ==
+             LeadQualifier.warranties_its_valid?(events_two, %{
                proposal_id: "af6e600b-2622-40d1-89ad-d3e5b6cc2fdf"
              })
   end

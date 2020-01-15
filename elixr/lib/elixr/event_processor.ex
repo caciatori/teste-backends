@@ -57,8 +57,8 @@ defmodule Elixr.EventProcessor do
       | proposal_id: proposal_id,
         proponent_id: proponent_id,
         proponent_name: proponent_name,
-        proponent_age: proponent_age,
-        proponent_monthly_income: proponent_monthly_income,
+        proponent_age: String.to_integer(proponent_age),
+        proponent_monthly_income: String.to_float(proponent_monthly_income),
         proponent_is_main: proponent_is_main
     }
   end
@@ -75,7 +75,7 @@ defmodule Elixr.EventProcessor do
       build_event_struct(event_data)
       | proposal_id: proposal_id,
         warranty_id: warranty_id,
-        warranty_value: warranty_value,
+        warranty_value: String.to_float(warranty_value),
         warranty_province: warranty_province
     }
   end
@@ -90,8 +90,8 @@ defmodule Elixr.EventProcessor do
     %{
       build_event_struct(event_data)
       | proposal_id: proposal_id,
-        proposal_loan_value: proposal_loan_value,
-        proposal_number_of_monthly_installments: proposal_number_of_monthly_installments
+        proposal_loan_value: String.to_float(proposal_loan_value),
+        proposal_number_of_monthly_installments: String.to_integer(proposal_number_of_monthly_installments)
     }
   end
 
