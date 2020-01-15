@@ -2,8 +2,7 @@ defmodule Elixr.Warranty do
   alias Elixr.{EventEnumerable, Proposal}
 
   def warranties_its_valid?(events, %{:proposal_id => proposal_id}) do
-    warranties =
-      EventEnumerable.filter_by_schema_and_proposal_id(events, :warranty, proposal_id)
+    warranties = EventEnumerable.filter_by_schema_and_proposal_id(events, :warranty, proposal_id)
 
     warranties = remove_warranties_in_provinces_not_allowed(warranties)
 

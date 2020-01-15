@@ -84,4 +84,23 @@ defmodule Elixr.LeadQualifierTest do
                proposal_id: "af6e600b-2622-40d1-89ad-d3e5b6cc2fdf"
              })
   end
+
+  test "warranties_its_valid/2 should return true with an invalid model " do
+    %{events: events_one} = EventProcessor.process(FileReader.read("invalid_warranty.txt"))
+
+    assert false ==
+             LeadQualifier.warranties_its_valid?(events_one, %{
+               proposal_id: "bd6abe95-7c44-41a4-92d0-edf4978c9f4e"
+             })
+
+    assert false ==
+             LeadQualifier.warranties_its_valid?(events_one, %{
+               proposal_id: "af6e600b-2622-40d1-89ad-d3e5b6cc2fdf"
+             })
+
+    assert false ==
+             LeadQualifier.warranties_its_valid?(events_one, %{
+               proposal_id: "bd6abe95-7c44-41a4-92d0-edf4978c9f4i"
+             })
+  end
 end
