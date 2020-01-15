@@ -1,5 +1,5 @@
 defmodule Elixr.EventProcessor do
-  alias Elixr.Event
+  alias Elixr.{Event, EventEnumerable}
 
   defstruct(
     events: [],
@@ -28,16 +28,12 @@ defmodule Elixr.EventProcessor do
     events
     |> Enum.map(fn event -> event |> String.split(",") end)
     |> Enum.map(&convert_list_to_struct/1)
-    |> Enum.sort(&by_datetime_asc/2)
+    |> Enum.sort(&EventEnumerable.by_datetime_asc/2)
     |> Enum.uniq_by(&event_id/1)
   end
 
   defp event_id(event = %Event{}) do
     event.event_id
-  end
-
-  defp by_datetime_asc(e1 = %Event{}, e2 = %Event{}) do
-    e1.event_timestamp <= e2.event_timestamp
   end
 
   defp convert_list_to_struct(event) do

@@ -4,7 +4,6 @@ defmodule EventProcessorTest do
   alias Elixr.EventProcessor
 
   @model_one FileReader.read_model_one()
-  @model_two FileReader.read_model_two()
 
   test "Read an invalid parameter and return a nil value" do
     assert EventProcessor.process("") == nil

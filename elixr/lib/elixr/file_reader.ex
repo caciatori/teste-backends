@@ -14,6 +14,11 @@ defmodule Elixr.FileReader do
     |> read_file()
   end
 
+  def read(file_name) do
+    "#{@assets_path}/#{file_name}"
+    |> read_file()
+  end
+
   defp read_file(file_name) do
     file_name
     |> Path.expand(__DIR__)
