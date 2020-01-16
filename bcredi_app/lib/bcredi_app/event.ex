@@ -1,4 +1,4 @@
-defmodule Elixr.Event do
+defmodule BcrediApp.Event do
   defstruct(
     event_id: nil,
     event_schema: nil,
