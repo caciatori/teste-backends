@@ -16,4 +16,9 @@ defmodule BcrediApp.Event do
     proponent_monthly_income: nil,
     proponent_is_main: nil
   )
+
+  def read_messages() do
+    import GenServer
+    GenServer.call(:bapp, {:events})
+  end
 end

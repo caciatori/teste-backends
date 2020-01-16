@@ -1,12 +1,12 @@
 defmodule BcrediApp.Warranty do
   alias BcrediApp.{EventEnumerable, Proposal}
 
-  def warranties_its_valid?(events, %{:proposal_id => proposal_id}) do
-    warranties = EventEnumerable.filter_by_schema_and_proposal_id(events, :warranty, proposal_id)
+  def warranties_its_valid?(%{:proposal_id => proposal_id}) do
+    warranties = EventEnumerable.filter_by_schema_and_proposal_id(:warranty, proposal_id)
 
     warranties = remove_warranties_in_provinces_not_allowed(warranties)
 
-    proposal = Proposal.find_proposal_by_id(events, proposal_id)
+    proposal = Proposal.find_proposal_by_id(proposal_id)
 
     length(warranties) > 0 && warranty_value_is_valid?(warranties, proposal)
   end

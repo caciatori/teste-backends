@@ -19,6 +19,8 @@ defmodule BcrediApp.MixProject do
   end
 
   defp deps do
-    []
+    [
+      {:credo, "~> 1.1"}
+    ]
   end
 end

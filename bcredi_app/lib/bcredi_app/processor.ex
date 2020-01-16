@@ -5,6 +5,7 @@ defmodule BcrediApp.Processor do
     events: [],
     total_of_events: 0
   )
+
   def execute(nil), do: []
 
   def execute(str_list) do
@@ -51,7 +52,7 @@ defmodule BcrediApp.Processor do
         proponent_name: proponent_name,
         proponent_age: String.to_integer(proponent_age),
         proponent_monthly_income: String.to_float(proponent_monthly_income),
-        proponent_is_main: proponent_is_main
+        proponent_is_main: proponent_is_main == "true"
     }
   end
 

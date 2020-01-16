@@ -6,17 +6,16 @@ defmodule BcrediApp.Proposal do
       proposal_number_of_monthly_installments_valid?(proposal)
   end
 
-  def find_proposal_by_id(events, proposal_id) do
-    events
-    |> EventEnumerable.filter_by_schema(:proposal)
+  def find_proposal_by_id(proposal_id) do
+    EventEnumerable.filter_by_schema(:proposal)
     |> Enum.find(nil, &(&1.proposal_id == proposal_id))
   end
 
-  def monthly_loan_value(events, proposal_id) do
+  def monthly_loan_value(proposal_id) do
     %{
       proposal_number_of_monthly_installments: proposal_number_of_monthly_installments,
       proposal_loan_value: proposal_loan_value
-    } = find_proposal_by_id(events, proposal_id)
+    } = find_proposal_by_id(proposal_id)
 
     Float.round(proposal_loan_value / proposal_number_of_monthly_installments, 2)
   end

@@ -44,7 +44,7 @@ defmodule QueueTest do
 
     result = Queue.action(:removed, created_proposal_2, :proposals, result)
 
-    assert length(result.proposals) == 0
+    assert Enum.empty?(result.proposals)
     assert length(result.events) == 4
   end
 
@@ -57,7 +57,7 @@ defmodule QueueTest do
 
     result = Queue.action(:deleted, created_proposal_1, :warranties, result)
 
-    assert length(result.proposals) == 0
+    assert assert Enum.empty?(result.proposals)
   end
 
   test "action/4 change name of proponent" do

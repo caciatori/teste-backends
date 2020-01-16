@@ -1,24 +1,24 @@
 defmodule BcrediApp.Proponent do
   alias BcrediApp.{EventEnumerable, Proposal}
 
-  def valid_proponents(events, %{:proposal_id => proposal_id}) do
-    proponents = EventEnumerable.filter_by_schema_and_proposal_id(events, :proponent, proposal_id)
+  def valid_proponents(%{:proposal_id => proposal_id}) do
+    proponents = EventEnumerable.filter_by_schema_and_proposal_id(:proponent, proposal_id)
 
-    if proponents_are_valid?(events, proponents, proposal_id) do
+    if proponents_are_valid?(proponents, proposal_id) do
       proponents
     end
 
     []
   end
 
-  defp proponents_are_valid?(events, proponents, proposal_id) do
-    main_proponent = Enum.find(proponents, nil, & &1.proponent_is_main)
-    loan_monthly_value = Proposal.monthly_loan_value(events, proposal_id)
+  defp proponents_are_valid?(proponents, proposal_id) do
+    main_proponent = Enum.find(proponents, &(&1.proponent_is_main == true))
+    loan_monthly_value = Proposal.monthly_loan_value(proposal_id)
 
     length(proponents) >= 2 &&
-    Enum.all?(proponents, &they_are_adults?/1) &&
-    Enum.any?(proponents, &someone_is_main?/1) &&
-    income_is_enough?(loan_monthly_value, main_proponent)
+      Enum.all?(proponents, &they_are_adults?/1) &&
+      Enum.any?(proponents, &someone_is_main?/1) &&
+      income_is_enough?(loan_monthly_value, main_proponent)
   end
 
   defp income_is_enough?(loan_monthly_value, %{

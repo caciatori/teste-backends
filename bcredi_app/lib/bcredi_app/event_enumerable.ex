@@ -1,15 +1,27 @@
 defmodule BcrediApp.EventEnumerable do
-  def filter_by_schema_and_proposal_id(events, schema, proposal_id) do
-    filter_by_schema(events, schema)
+  alias BcrediApp.Event
+
+  def filter_by_schema_and_proposal_id(schema, proposal_id) do
+    filter_by_schema(schema)
     |> Enum.filter(&(&1.proposal_id == proposal_id))
   end
 
-  def filter_by_schema(nil, _), do: []
-  def filter_by_schema([], _), do: []
+  def filter_by_schema(schema) do
+    result = Event.read_messages()
 
-  def filter_by_schema(list, schema) do
-    Enum.filter(list, &(&1.event_schema == schema))
-    |> Enum.sort(&by_datetime_desc/2)
+    cond do
+      :proposal == schema ->
+        %{proposals: proposals} = result
+        proposals
+
+      :proponent == schema ->
+        %{proponents: proponents} = result
+        proponents
+
+      :warranty == schema ->
+        %{warranties: warranties} = result
+        warranties
+    end
   end
 
   def by_datetime_asc(e1 = %{}, e2 = %{}) do
