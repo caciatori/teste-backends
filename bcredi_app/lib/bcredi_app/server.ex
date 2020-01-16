@@ -9,39 +9,39 @@ defmodule BcrediApp.Server do
     {:ok, BcrediApp.Queue.initialize()}
   end
 
-  def handle_call({:create_proposal, event}, _from, state) do
-    perfom_action(:added, event, :proposals, state)
+  def handle_call({:created_proposal, event}, _from, state) do
+    perfom_action(:created, event, :proposals, state)
   end
 
-  def handle_call({:update_proposal, event}, _from, state) do
+  def handle_call({:updated_proposal, event}, _from, state) do
     perfom_action(:updated, event, :proposals, state)
   end
 
-  def handle_call({:remove_proposal, event}, _from, state) do
+  def handle_call({:deleted_proposal, event}, _from, state) do
     perfom_action(:deleted, event, :proposals, state)
   end
 
-  def handle_call({:add_proponent, event}, _from, state) do
+  def handle_call({:added_proponent, event}, _from, state) do
     perfom_action(:added, event, :proponents, state)
   end
 
-  def handle_call({:update_proponent, event}, _from, state) do
+  def handle_call({:updated_proponent, event}, _from, state) do
     perfom_action(:updated, event, :proponents, state)
   end
 
-  def handle_call({:remove_proponent, event}, _from, state) do
+  def handle_call({:removed_proponent, event}, _from, state) do
     perfom_action(:removed, event, :proponents, state)
   end
 
-  def handle_call({:add_warranty, event}, _from, state) do
+  def handle_call({:added_warranty, event}, _from, state) do
     perfom_action(:added, event, :warranties, state)
   end
 
-  def handle_call({:remove_warranty, event}, _from, state) do
+  def handle_call({:removed_warranty, event}, _from, state) do
     perfom_action(:removed, event, :warranties, state)
   end
 
-  def handle_call({:update_warranty, event}, _from, state) do
+  def handle_call({:updated_warranty, event}, _from, state) do
     perfom_action(:updated, event, :warranties, state)
   end
 
