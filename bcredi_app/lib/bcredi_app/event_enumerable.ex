@@ -1,5 +1,7 @@
 defmodule BcrediApp.EventEnumerable do
-  alias BcrediApp.Event
+  alias BcrediApp.Client
+
+  @client Application.get_env(:bcredi_app, :client, Client)
 
   def filter_by_schema_and_proposal_id(schema, proposal_id) do
     filter_by_schema(schema)
@@ -7,7 +9,7 @@ defmodule BcrediApp.EventEnumerable do
   end
 
   def filter_by_schema(schema) do
-    result = Event.read_messages()
+    result = @client.read_messages()
 
     cond do
       :proposal == schema ->

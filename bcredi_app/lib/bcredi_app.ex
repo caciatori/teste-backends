@@ -1,6 +1,5 @@
 defmodule BcrediApp do
-  import GenServer
-  alias BcrediApp.{FileReader, Processor, Event, Proposal, Proponent, Warranty}
+  alias BcrediApp.{Client, FileReader, Processor, Proponent, Proposal, Warranty}
 
   def start do
     {:ok, pid} = Supervisor.start_child(BcrediApps.Supervisor, [])
@@ -12,27 +11,15 @@ defmodule BcrediApp do
   end
 
   def process_message(message) do
-    Processor.execute(message)
-    |> send_messages(:bapp)
+    Processor.execute(message) |> Client.send_messages()
 
-    %{proposals: proposals} = Event.read_messages()
+    %{proposals: proposals} = Client.read_messages()
 
     proposals
     |> Enum.filter(&Proposal.proposal_its_valid?/1)
-    |> Enum.filter(&Proponent.valid_proponents/1)
+    |> Enum.filter(&Proponent.valid_proponents?/1)
     |> Enum.filter(&Warranty.warranties_its_valid?/1)
     |> Enum.map(& &1.proposal_id)
     |> Enum.join(",")
-  end
-
-  defp send_messages(message, pid) do
-    %{events: events} = message
-
-    for event <- events do
-      %{event_schema: event_schema, event_action: event_action} = event
-      event_atom = :"#{event_action}_#{event_schema}"
-
-      GenServer.call(pid, {event_atom, event})
-    end
   end
 end

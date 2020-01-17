@@ -1,14 +1,10 @@
 defmodule BcrediApp.Proponent do
   alias BcrediApp.{EventEnumerable, Proposal}
 
-  def valid_proponents(%{:proposal_id => proposal_id}) do
+  def valid_proponents?(%{:proposal_id => proposal_id}) do
     proponents = EventEnumerable.filter_by_schema_and_proposal_id(:proponent, proposal_id)
 
-    if proponents_are_valid?(proponents, proposal_id) do
-      proponents
-    end
-
-    []
+    proponents_are_valid?(proponents, proposal_id)
   end
 
   defp proponents_are_valid?(proponents, proposal_id) do

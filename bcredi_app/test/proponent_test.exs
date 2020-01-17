@@ -1,22 +1,33 @@
 defmodule BcrediApp.ProponentTest do
   use ExUnit.Case
-  alias BcrediApp.{Processor, FileReader, Proponent}
+
+  import Mox
+
+  alias BcrediApp.{FileReader, Processor, Proponent, Queue}
 
   @input_one Processor.execute(FileReader.read_model_one())
-  @input_two Processor.execute(FileReader.read_model_two())
 
   test "proponents_are_valid/2 should return true with a valid model " do
-    %{events: events_one} = @input_one
-    %{events: events_two} = @input_two
+    %{events: events} = @input_one
+
+    BcrediApp.ClientMock
+    |> expect(:read_messages, fn -> build_queue_model(events) end)
+    |> expect(:read_messages, fn -> build_queue_model(events) end)
 
     assert true ==
-             Proponent.proponents_are_valid?(events_one, %{
-               proposal_id: "bd6abe95-7c44-41a4-92d0-edf4978c9f4e"
-             })
-
-    assert true ==
-             Proponent.proponents_are_valid?(events_two, %{
+             Proponent.valid_proponents?(%{
                proposal_id: "af6e600b-2622-40d1-89ad-d3e5b6cc2fdf"
              })
+  end
+
+  defp build_queue_model(events) do
+    result = %Queue{}
+
+    %{
+      result
+      | proposals: Enum.filter(events, &(&1.event_schema == :proposal)),
+        proponents: Enum.filter(events, &(&1.event_schema == :proponent)),
+        warranties: Enum.filter(events, &(&1.event_schema == :warranty))
+    }
   end
 end
