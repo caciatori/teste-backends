@@ -1,4 +1,8 @@
 defmodule BcrediApp.Warranty do
+  @moduledoc """
+  Module that validate a warranty
+  """
+
   alias BcrediApp.{EventEnumerable, Proposal}
 
   def warranties_its_valid?(%{:proposal_id => proposal_id}) do

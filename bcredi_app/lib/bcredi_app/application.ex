@@ -1,4 +1,7 @@
 defmodule BcrediApp.Application do
+  @moduledoc """
+  Application module
+  """
   def start(_type, _args) do
     import Supervisor.Spec
 

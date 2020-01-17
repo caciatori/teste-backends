@@ -1,4 +1,7 @@
 defmodule BcrediApp.Processor do
+  @moduledoc """
+  Module that transform a message to a Event struct
+  """
   alias BcrediApp.{Event, EventEnumerable}
 
   defstruct(

@@ -1,4 +1,7 @@
 defmodule BcrediApp.Proposal do
+  @moduledoc """
+  Module that validate Proposal
+  """
   alias BcrediApp.EventEnumerable
 
   def proposal_its_valid?(proposal = %{}) do

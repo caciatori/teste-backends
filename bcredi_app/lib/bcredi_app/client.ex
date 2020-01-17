@@ -1,4 +1,7 @@
 defmodule BcrediApp.Client do
+  @moduledoc """
+  Module that communicate with genserver
+  """
   @server_name :bapp
 
   @callback send_messages(list()) :: map()
@@ -14,7 +17,7 @@ defmodule BcrediApp.Client do
   end
 
   @callback read_messages() :: list()
-  def read_messages() do
+  def read_messages do
     GenServer.call(@server_name, {:events})
   end
 end

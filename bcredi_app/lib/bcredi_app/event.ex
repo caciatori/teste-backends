@@ -1,4 +1,7 @@
 defmodule BcrediApp.Event do
+  @moduledoc """
+  Event struct model
+  """
   defstruct(
     event_id: nil,
     event_schema: nil,

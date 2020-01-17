@@ -1,4 +1,7 @@
 defmodule BcrediApp.Proponent do
+  @moduledoc """
+  Module that validate the proponent
+  """
   alias BcrediApp.{EventEnumerable, Proposal}
 
   def valid_proponents?(%{:proposal_id => proposal_id}) do

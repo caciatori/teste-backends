@@ -1,4 +1,7 @@
 defmodule BcrediApp.Queue do
+  @moduledoc """
+  Module that manipulate state of the queue
+  """
   defstruct(
     events: [],
     proponents: [],
@@ -6,7 +9,7 @@ defmodule BcrediApp.Queue do
     warranties: []
   )
 
-  def initialize() do
+  def initialize do
     %BcrediApp.Queue{}
   end
 

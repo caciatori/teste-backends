@@ -1,15 +1,15 @@
 defmodule BcrediApp.FileReader do
   @moduledoc """
-  Module that reads input models in the assets folder
+  Module that reads input models at assets folder
   """
   @assets_path "../../assets"
 
-  def read_model_one() do
+  def read_model_one do
     "#{@assets_path}/model_one.txt"
     |> read_file()
   end
 
-  def read_model_two() do
+  def read_model_two do
     "#{@assets_path}/model_two.txt"
     |> read_file()
   end

@@ -1,4 +1,7 @@
 defmodule BcrediApp.Server do
+  @moduledoc """
+  Server to hold state of events queue
+  """
   use GenServer
 
   def start_link do

@@ -15,7 +15,6 @@ defmodule BcrediApp.WarrantyTest do
     |> expect(:read_messages, fn -> build_queue_model(events) end)
     |> expect(:read_messages, fn -> build_queue_model(events) end)
 
-
     assert true ==
              Warranty.warranties_its_valid?(%{
                proposal_id: "bd6abe95-7c44-41a4-92d0-edf4978c9f4e"

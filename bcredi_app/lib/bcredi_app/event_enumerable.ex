@@ -1,4 +1,7 @@
 defmodule BcrediApp.EventEnumerable do
+  @moduledoc """
+  Module with generical functions about event list
+  """
   alias BcrediApp.Client
 
   @client Application.get_env(:bcredi_app, :client, Client)

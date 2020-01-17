@@ -1,4 +1,7 @@
 defmodule BcrediApp do
+  @moduledoc """
+  App model
+  """
   alias BcrediApp.{Client, FileReader, Processor, Proponent, Proposal, Warranty}
 
   def start do
@@ -6,7 +9,7 @@ defmodule BcrediApp do
     pid
   end
 
-  def process_local_message() do
+  def process_local_message do
     FileReader.read_model_one() |> process_message()
   end
 

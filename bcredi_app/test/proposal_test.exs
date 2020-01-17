@@ -3,7 +3,7 @@ defmodule BcrediApp.ProposalTest do
   alias BcrediApp.Proposal
 
   test "proposal_its_valid/1 shoud return false with an invalid param" do
-    p1 = %{proposal_loan_value: 10000, proposal_number_of_monthly_installments: 8}
+    p1 = %{proposal_loan_value: 10_000, proposal_number_of_monthly_installments: 8}
     p2 = %{proposal_loan_value: 10_000_000, proposal_number_of_monthly_installments: 360}
     p3 = %{proposal_loan_value: -10, proposal_number_of_monthly_installments: 0}
     p4 = %{proposal_loan_value: 0, proposal_number_of_monthly_installments: -99}
@@ -15,7 +15,7 @@ defmodule BcrediApp.ProposalTest do
   end
 
   test "proposal_its_valid/1 shoud return true with a valid param" do
-    p1 = %{proposal_loan_value: 30000, proposal_number_of_monthly_installments: 24}
+    p1 = %{proposal_loan_value: 30_000, proposal_number_of_monthly_installments: 24}
     p2 = %{proposal_loan_value: 200_000, proposal_number_of_monthly_installments: 48}
     p3 = %{proposal_loan_value: 3_000_000, proposal_number_of_monthly_installments: 180}
 
